@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+.form-container { margin-bottom: 20px; }
+.property-list { margin-top: 30px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border: 1px solid #ddd; }
+.btn { padding: 5px 10px; cursor: pointer; }
