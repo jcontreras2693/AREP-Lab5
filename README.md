@@ -56,6 +56,8 @@ These instructions will allow you to get a working copy of the project on your l
 
 - [Java](https://www.oracle.com/co/java/technologies/downloads/) 21 or higher.
 - [Maven](https://maven.apache.org/download.cgi). 3.8.1 o higher.
+- [Docker](https://www.docker.com/products/docker-desktop/). Latest
+- [AWS](https://aws.amazon.com/). Account
 - [Git](https://git-scm.com/downloads) (optional).
 - Web Browser.
 
@@ -66,6 +68,9 @@ java -version
 ```
 ```
 mvn --version
+```
+```
+docker --version
 ```
 ```
 git --version
@@ -93,60 +98,79 @@ git --version
 
    ![](src/main/resources/images/succes.png)
 
-4. Execute the project with the following command:
+4. Run MySQL on Docker with the next command:
 
     ```
-    mvn exec:java -Dexec.mainClass="co.edu.eci.WebApplication"
+    docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=properties_db -p 3306:3306 -d mysql
     ```
 
-5. From IntellIj terminal you can also use this one:
+5. Run the application with this command:
+
+   ```
+   mvn spring-boot:run
+   ```
+
+6. For local test access the address [localhost:8080](http://localhost:8080/) from a web browser to interact with the web application.
+
+   ![](src/main/resources/images/local-home-page.png)
+
+7. Create the Docker image of the application:
 
     ```
-    java -cp "target/classes;target/dependency/*" co.edu.eci.WebApplication
+    docker build --tag taller5arep .
     ```
 
-6. The installation process will have been successful if you see a message like this in your command console. (If this steps didn't work, execute the project directly from IntelliJ)
+7. Login and create the image on Dockerhub, the push the image:
+
+    ```
+    docker login
+    docker tag taller5arep tu-usuario-docker/tu-repositorio-dockerhub
+    docker push tu-usuario-docker/tu-repositorio-dockerhub
+    ```
+
+8. Run the application with this command:
+
+   ```
+   mvn spring-boot:run
+   ```
+
+9. Finally, access the address [localhost:8080](http://localhost:8080/) from a web browser to interact with the web application.
+
+    ![](src/main/resources/images/local-home-page.png)
+
+10. AWS deployed.
 
 
-7. Finally, access the address [localhost:8080](http://localhost:8080/) from a web browser to interact with the web application.
-
-   - GET Request example.
-
-       ![](src/main/resources/images/get.png)
-
-   - GET Request example by ID.
-
-     ![](src/main/resources/images/getid.png)
-
-   - POST Request example.
-
-       ![](src/main/resources/images/post.png)
-
-   - PUT Request example.
-
-     ![](src/main/resources/images/put.png)
-
-   - DELETE Request example.
-
-       ![](src/main/resources/images/delete.png)
 
 ## Application Running
 
-- Containers creation
+- Homepage
 
-  ![](src/main/resources/images/container-creation.png)
+  ![](src/main/resources/images/homepage.png)
 
-- Containers running
-
-    ![](src/main/resources/images/docker.png)
-
-- Images
+- Dockerhub
 
   ![](src/main/resources/images/docker-images.png)
 
-- Containers
+- GET Request example.
 
-  ![](src/main/resources/images/docker-containers.png)
+  ![](src/main/resources/images/get.png)
+
+- GET Request example by ID.
+
+  ![](src/main/resources/images/getid.png)
+
+- POST Request example.
+
+  ![](src/main/resources/images/post.png)
+
+- PUT Request example.
+
+  ![](src/main/resources/images/put.png)
+
+- DELETE Request example.
+
+  ![](src/main/resources/images/delete.png)
 
 ## Running the Tests
 
