@@ -1,4 +1,4 @@
-package co.edu.eci.classwork;
+package co.edu.eci;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

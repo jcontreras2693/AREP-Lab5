@@ -1,7 +1,7 @@
-package co.edu.eci.classwork.service;
+package co.edu.eci.service;
 
-import co.edu.eci.classwork.model.Property;
-import co.edu.eci.classwork.repository.PropertyRepository;
+import co.edu.eci.model.Property;
+import co.edu.eci.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

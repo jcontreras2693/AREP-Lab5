@@ -1,7 +1,7 @@
-package co.edu.eci.classwork.controller;
+package co.edu.eci.controller;
 
-import co.edu.eci.classwork.model.Property;
-import co.edu.eci.classwork.service.PropertyService;
+import co.edu.eci.model.Property;
+import co.edu.eci.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

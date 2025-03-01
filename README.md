@@ -1,14 +1,52 @@
 # Taller 5 | AREP
 
-## Modularization with Virtualization and Introduction to Docker
+## Creation of a CRUD System to Manage Properties
 
-This project is a lightweight Java-based web framework designed to help developers build web applications with RESTful services and manage static assets like HTML, CSS, JavaScript, and images. It offers features such as defining REST routes using lambda expressions, extracting query parameters from requests, and setting up directories for static files. The framework has also been optimized to support concurrent requests and includes improvements for a smooth and graceful server shutdown.
+In this project, we will develop a simple CRUD (Create, Read, Update, Delete) system for managing real estate properties. They will build a basic web application that enables users to perform key operations on property listings, finally the web application will be released in AWS.
+
+## Project Summary
 
 ## Architecture
 
 The architecture used aligns with the Client-Server pattern, in which a server hosts all resources, and one or more clients can access and use these resources through requests that are responded to by the Backend's REST services.
 
 ![](src/main/resources/images/architecture.png)
+
+## Class Design
+
+```
+src/
+  main/
+    java/
+      co/
+        edu/
+          eci/
+            controller/
+              PropertyController.java
+            model/
+              Property.java
+            repository/
+              PropertyRepository.java
+            service/
+              PropertyService.java
+            WebApplication.java                 # Clase principal
+    resources/
+        images/                                 # Recursos para el archivo Readme
+        static/            
+            index.html
+            styles.css
+            script.js
+        application.properties
+  test/
+    java/
+      co/
+        edu/
+          eci/
+            WebApplicationTest.java             # Pruebas Unitarias
+Dockerfile
+pom.xml
+README.md
+```
 
 ## Getting Started
 
@@ -33,18 +71,18 @@ mvn --version
 git --version
 ```
 
-### Installing
+### Installing and Deployment
 
 1. Download the repository from GitHub in a .zip or clone it to your local machine using Git.
 
     ```
-    git clone https://github.com/jcontreras2693/AREP-Lab4.git
+    git clone https://github.com/jcontreras2693/AREP-Lab5.git
     ```
    
 2. Navigate to the project directory.
 
     ```
-    cd AREP-Lab4
+    cd AREP-Lab5
     ```
    
 3. Build the project by running the following command:
@@ -52,6 +90,8 @@ git --version
     ```
     mvn clean compile
     ```
+
+   ![](src/main/resources/images/succes.png)
 
 4. Execute the project with the following command:
 
@@ -67,65 +107,30 @@ git --version
 
 6. The installation process will have been successful if you see a message like this in your command console. (If this steps didn't work, execute the project directly from IntelliJ)
 
-    ![](src/main/resources/images/succes.png)
 
-7. Finally, access the address [localhost:35000](http://localhost:35000/) from a web browser to interact with the web application.
+7. Finally, access the address [localhost:8080](http://localhost:8080/) from a web browser to interact with the web application.
 
-   - Home page example.
+   - GET Request example.
 
-       ![](src/main/resources/images/home-page.png)
+       ![](src/main/resources/images/get.png)
 
-   - Home page Post Request example.
+   - GET Request example by ID.
 
-       ![](src/main/resources/images/employed-page.png)
+     ![](src/main/resources/images/getid.png)
 
-   - Get Request on /pi.
+   - POST Request example.
 
-     ![](src/main/resources/images/pi-endpoint.png)
+       ![](src/main/resources/images/post.png)
 
-   - Get Request on /api/pokemon.
+   - PUT Request example.
 
-       ![](src/main/resources/images/api-pokemon.png)
+     ![](src/main/resources/images/put.png)
 
-   - Post Request on /api/pokemon.
+   - DELETE Request example.
 
-     ![](src/main/resources/images/post-pokemon.png)
+       ![](src/main/resources/images/delete.png)
 
-## Concurency
-- The servers uses ThreadPools to manage and control the concurrency of the server and PokemonTeam array was replaced by a thread save data structures.
-
-  ```
-  public class PokemonServer {
-    ...
-    
-    private static final ConcurrentLinkedQueue<Pokemon> pokemonTeam = new ConcurrentLinkedQueue<>();
-  
-    private static final int THREADS = 10;
-    private static ExecutorService threadPool = Executors.newFixedThreadPool(THREADS);
-    private static boolean running = true;
-  
-    ...
-  }
-  ```
-  
-- Graceful shutdown.
-
-  ```
-  public static void stop() {
-    running = false;
-    threadPool.shutdown();
-    try {
-        if (!threadPool.awaitTermination(60, TimeUnit.SECONDS)) {
-            threadPool.shutdownNow();
-        }
-    } catch (InterruptedException e) {
-        threadPool.shutdownNow();
-    }
-    System.out.println("Server stopped");
-  }
-  ```
-
-## Application Running on Docker
+## Application Running
 
 - Containers creation
 
@@ -133,17 +138,7 @@ git --version
 
 - Containers running
 
-  - PORT: 34000
-
-    ![](src/main/resources/images/docker1.png)
-
-  - PORT: 34001
-
-    ![](src/main/resources/images/docker2.png)
-
-  - PORT: 34002
-
-    ![](src/main/resources/images/docker3.png)
+    ![](src/main/resources/images/docker.png)
 
 - Images
 
@@ -175,7 +170,7 @@ If the tests were successful, you will see a message like this in your command c
 
 ## Authors
 
-* **Juan David Contreras Becerra** - *Taller 4 | AREP* - [AREP-Lab4](https://github.com/AnaDuranB/Taller-04-AREP.git)
+* **Juan David Contreras Becerra** - *Taller 5 | AREP* - [AREP-Lab5](https://github.com/jcontreras2693/AREP-Lab5.git)
 
 ## Acknowledgements
 
