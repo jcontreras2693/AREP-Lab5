@@ -188,7 +188,7 @@ git --version
     ```
     
     ![](src/main/resources/images/homepage.png)
-    
+
 
 ## Application Running
 
