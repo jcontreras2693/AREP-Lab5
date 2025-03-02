@@ -2,13 +2,17 @@
 
 ## Creation of a CRUD System to Manage Properties
 
-In this project, we will develop a simple CRUD (Create, Read, Update, Delete) system for managing real estate properties. They will build a basic web application that enables users to perform key operations on property listings, finally the web application will be released in AWS.
+In this project, we will develop a simple CRUD (Create, Read, Update, Delete) system for managing real estate properties through a web application. Users will be able to perform key operations on property listings, and the application will be deployed in the cloud using AWS EC2 instances.
 
-## Project Summary
+The backend is built with Spring Boot and runs inside a Docker container on one EC2 instance, while the MySQL database is hosted in another Docker container on a separate EC2 instance. This architecture ensures scalability, maintainability, and separation of concerns, providing a flexible and efficient deployment strategy.
 
 ## Architecture
 
-The architecture used aligns with the Client-Server pattern, in which a server hosts all resources, and one or more clients can access and use these resources through requests that are responded to by the Backend's REST services.
+The architecture of this project follows a distributed deployment model using AWS EC2 instances. It consists of three main components:
+
+- Browser: Users interact with the system through a web browser, sending requests to the web application.
+- WebApplication: A Spring Boot application runs inside a Docker container on a EC2 instance, handling business logic, processing user requests, and communicating with the database.
+- Database: A MySQL database runs inside a Docker container on a separate EC2 instance, storing and managing property data.
 
 ![](src/main/resources/images/architecture.png)
 
@@ -42,7 +46,7 @@ src/
       co/
         edu/
           eci/
-            WebApplicationTest.java             # Pruebas Unitarias
+            PropertyControllerTest.java         # Pruebas Unitarias
 Dockerfile
 pom.xml
 README.md
@@ -116,24 +120,23 @@ git --version
     ```
     docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=properties_db -p 3306:3306 -d mysql
     ```
-4. Enable external connections to the DB, first get into the container (password: root) with the command:
+
+4. You can get into the database in the container (password: root) with the command:
 
     ```
     docker exec -it mysql-container mysql -u root -p
     ```
-
-5. Use these commands on the MySQL console:
-
-    ```
-    CREATE USER 'springuser'@'%' IDENTIFIED BY 'password';
-    GRANT ALL PRIVILEGES ON properties_db.* TO 'springuser'@'%' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
-    ```
    
-6. Exit the connection and replace this line in the application.properties file:
+5. Exit the connection and replace this line in the application.properties file:
 
     ```
     spring.datasource.url=jdbc:mysql://your-EC2-public-IP:3306/properties_db
+    ```
+   
+6. Compile and generate the .jar files again with the following command:
+
+    ```
+    mvn clean package
     ```
 
 7. Create the Docker image of the application:
@@ -145,15 +148,16 @@ git --version
 8. For local tests [localhost:8080](http://localhost:8080/), create a Docker container of the application or run it using an IDE:
 
     ```
-    docker run -d -p 8080:8080 --name taller5container taller5arep
+    docker run -d -p 8080:8080 --name taller5 taller5arep
     ```
 
-   ![](src/main/resources/images/local-home-page.png)
+   ![](src/main/resources/images/local-homepage.png)
 
 9. Login and create the image on Dockerhub, the push the image:
 
     ```
     docker login
+    docker tag taller5arep jcontreras2025/taller5arep:latest
     docker push jcontreras2025/taller5arep
     ```
 
@@ -174,14 +178,17 @@ git --version
 
    ```
    sudo service docker start
-   sudo docker run -d -p 42000:8080 --name taller5 jcontreras2025/taller5arep
+   sudo docker run -d -p 8080:8080 --name taller5 jcontreras2025/taller5arep
    ```
 
 10. Copy the public DNS of the EC2 instance and paste it on a web browser using the port 42000, should look like this:
 
     ```
-    http://ec2-100-24-43-190.compute-1.amazonaws.com:42000/
+    http://ec2-44-204-74-94.compute-1.amazonaws.com:8080/
     ```
+    
+    ![](src/main/resources/images/homepage.png)
+    
 
 ## Application Running
 
@@ -228,7 +235,3 @@ If the tests were successful, you will see a message like this in your command c
 ## Authors
 
 * **Juan David Contreras Becerra** - *Taller 5 | AREP* - [AREP-Lab5](https://github.com/jcontreras2693/AREP-Lab5.git)
-
-## Acknowledgements
-
-* **Billie Thompson** - *README template* - [PurpleBooth](https://github.com/PurpleBooth)
