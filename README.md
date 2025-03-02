@@ -165,7 +165,7 @@ git --version
 
 10. Create a new default EC2 instance on AWS and add a new Security Rule on the Security Group of the instance.:
 
-   ![](src/main/resources/images/security-app.png)
+    ![](src/main/resources/images/security-app.png)
 
 11. Connect to the EC2 instance, install docker with these commands:
 
@@ -176,10 +176,10 @@ git --version
 
 12. Start the Docker service and run the container with the application using this command:
 
-   ```
-   sudo service docker start
-   sudo docker run -d -p 8080:8080 --name taller5 jcontreras2025/taller5arep
-   ```
+    ```
+    sudo service docker start
+    sudo docker run -d -p 8080:8080 --name taller5 jcontreras2025/taller5arep
+    ```
 
 13. Copy the public DNS of the EC2 instance and paste it on a web browser using the port 42000, should look like this:
 
