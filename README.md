@@ -181,7 +181,7 @@ git --version
    sudo docker run -d -p 8080:8080 --name taller5 jcontreras2025/taller5arep
    ```
 
-10. Copy the public DNS of the EC2 instance and paste it on a web browser using the port 42000, should look like this:
+13. Copy the public DNS of the EC2 instance and paste it on a web browser using the port 42000, should look like this:
 
     ```
     http://ec2-44-204-74-94.compute-1.amazonaws.com:8080/
