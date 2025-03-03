@@ -115,7 +115,7 @@ git --version
     sudo yum install docker
     ```
 
-3. Create and un a mysql image on Docker, this will be our Database:
+3. Create and install a MySQL image on Docker, this will be our Database:
 
     ```
     docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=properties_db -p 3306:3306 -d mysql
